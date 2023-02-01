@@ -130,8 +130,10 @@ std::string ProductBookParser::categoryID()
  */
 Product* ProductBookParser::makeProduct()
 {
-
-
+    //dynamically allocate a new Book Object and initialize it with data from parser
+    Book* book = new Book("book", prodName_, price_, qty_, isbn_, author_);
+    //return new object (returns as pointer from dynamic allocation)
+    return book;
 }
 
 
@@ -185,8 +187,9 @@ std::string ProductClothingParser::categoryID()
  */
 Product* ProductClothingParser::makeProduct()
 {
-
-
+//dynamically allocate a new Clothing Object and initialize it with data from parser
+//return new object (returns as pointer from dynamic allocation)
+return new Clothing("clothing", prodName_, price_, qty_, size_, brand_);
 
 }
 
@@ -245,6 +248,8 @@ std::string ProductMovieParser::categoryID()
  */
 Product* ProductMovieParser::makeProduct()
 {
-
+//dynamically allocate a new Movie Object and initialize it with data from parser
+//return new object (returns as pointer from dynamic allocation)
+return new Movie("movie", prodName_, price_, qty_, genre_, rating_);
 
 }
