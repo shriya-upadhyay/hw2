@@ -1,3 +1,6 @@
 *.o
 amazon
 hw2_tests/
+database1.txt
+database2.txt
+test.cpp
