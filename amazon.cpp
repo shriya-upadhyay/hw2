@@ -9,6 +9,7 @@
 #include "db_parser.h"
 #include "product_parser.h"
 #include "util.h"
+#include "mydatastore.h"
 
 using namespace std;
 struct ProdNameSorter {
@@ -29,7 +30,8 @@ int main(int argc, char* argv[])
      * Declare your derived DataStore object here replacing
      *  DataStore type to your derived type
      ****************/
-    DataStore ds;
+    //declare my own datastore
+    MyDataStore ds = MyDataStore();
 
 
 
@@ -100,6 +102,50 @@ int main(int argc, char* argv[])
                 done = true;
             }
 	    /* Add support for other commands here */
+            //add support for "ADD command"
+            else if (cmd == "ADD") {
+                //input username and search_hit_number
+                string username;
+                unsigned int search_hit_number;
+                ss >> username;
+                ss >> search_hit_number;
+                //check for ss failure
+                if (ss.fail()) {
+                    cout << "Invalid Request" << endl;
+                }
+                //check for search_hits_number validity
+				if (search_hit_number > hits.size()) {
+					cout << "Invalid Request" << endl;
+				}
+                //call add_cart on username and product pointer of desired product
+                ds.add_cart(username, hits[search_hit_number - 1]);
+            }
+
+            //add support for "VIEWCART command"
+            else if (cmd == "VIEWCART") {
+                //input user name
+                string username;
+                ss >> username;
+                //check for ss failure
+                if (ss.fail()) {
+                    cout << "Invalid username" << endl;
+                }
+                //call add_cart on username
+                ds.view_cart(username);
+            }
+
+            //add support for "BUYCART command"
+            else if (cmd == "BUYCART") {
+                //input user name
+                string username;
+                ss >> username;
+                //check for ss failure
+                if (ss.fail()) {
+                    cout << "Invalid username" << endl;
+                }
+                //call add_cart on username
+                ds.buy_cart(username);
+            }
 
 
 
